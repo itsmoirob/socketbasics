@@ -4,6 +4,10 @@ var socket = io();
 
 socket.on('connect', function () {
     console.log('Connected to socket.io server!');
+    socket.emit('joinRoom', {
+        name: name,
+        room: room
+    });
 });
 
 socket.on('message', function (message) {
@@ -15,6 +19,9 @@ socket.on('message', function (message) {
     $message.append('<p><strong>' + message.name + ' ' + momentTimestamp + ':</strong></p>');
     $message.append('<p>' + message.text + '</p>');
 })
+
+//Update room ID with room name parameter
+jQuery('#room').text(room);
 
 // Handles submitting of new message
 var $form = jQuery('#message-form');
