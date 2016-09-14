@@ -33,11 +33,10 @@ function sendPrivateMessage(socket, message) {
     var info = clientInfo[socket.id];
     var message = message.text.replace('@private ', '');
     var userTo = message.split(' ')[0].slice(1);
-    // var userTo = messageArray[0];
 
     Object.keys(clientInfo).forEach(function (socketId) {
         var userInfo = clientInfo[socketId];
-        
+
         if (userTo == userInfo.name) {
             io.sockets.in(socketId).emit('message', {
                 name: 'Private message from ' + info.name,
